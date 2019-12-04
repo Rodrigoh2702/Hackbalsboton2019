@@ -88,6 +88,7 @@ public class Login_Controller {
         {
             try{
                 user = model.getAnswer(data.get("answer"));
+                System.out.println(user);
                 validate = validateAnswer(data, user, view);
             }catch(Exception ex){
                 showErrorAnswer(ex, view);
@@ -240,7 +241,7 @@ public class Login_Controller {
                     view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(
-                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    view, "Unexpected error :(", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

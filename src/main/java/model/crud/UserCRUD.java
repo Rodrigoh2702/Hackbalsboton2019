@@ -84,11 +84,11 @@ public class UserCRUD {
         return user;
     }
     
-    public User getAnswer(String answer){
+     public User getAnswer(String answer){
         EntityManager manager = EMFBootstrapper.openEntityManager();
         User user = new User();
         try {
-            user = (User) manager.createQuery("from users u where u.Answer='" + answer + "'").getSingleResult();
+            user = (User) manager.createQuery("from User u where u.Answer='" + answer + "'").getSingleResult();
         }
         catch(PersistenceException e) {
             throw e;

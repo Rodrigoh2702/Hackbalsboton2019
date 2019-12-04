@@ -88,7 +88,7 @@ public class Question extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            System.out.println(Log.answerUser(this));
+           // System.out.println(Log.answerUser(this));
              if(Log.answerUser(this)){
                 NewPassword newpass = new NewPassword();
                 newpass.setEmail(email);
