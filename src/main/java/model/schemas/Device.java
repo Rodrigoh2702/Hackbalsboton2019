@@ -31,7 +31,7 @@ public class Device {
     private Room room;
     
 
-    public Device(int id, String name, String type, String brand, String model, Boolean state, Group group) {
+    public Device(int id, String name, String type, String brand, String model, Boolean state, Room room) {
         Id = id;
         Name = name;
         Type = type;

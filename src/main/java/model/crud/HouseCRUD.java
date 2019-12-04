@@ -24,6 +24,10 @@ public class HouseCRUD {
         this.manager = manager;
     }
 
+    public HouseCRUD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void createHouse(House house){
         EntityTransaction transaction = manager.getTransaction();
         try {

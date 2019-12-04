@@ -23,12 +23,16 @@ public class add_user
   nuser.setName(view.getNombre());
   nuser.setEmail(view.getCorreo());
   nuser.setPassword(view.getContrasena());
+  nuser.setQuestion(view.getSecurityQuestion());
+  nuser.setAnswer(view.getSecurityAnswer());
   
   Map<String, String> data = new HashMap<>();
   data.put("nombre", view.getNombre());
   data.put("correo", view.getCorreo());
   data.put("contrasena", view.getContrasena());
   data.put("conf_contrasena", view.getConfcontrasena());
+  data.put("question", view.getSecurityQuestion());
+  data.put("answer", view.getSecurityAnswer());
 
   int campos = 0; //Verificacion campos
   int correo = 0; //Verificacion correo

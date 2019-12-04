@@ -11,11 +11,11 @@ public class Room {
     @Column(name = "name")
     private String Name;
     @Column(name = "idarea")
-    private String IdArea;
+    private int IdArea;
 
     public Room(){}
 
-    public Room(String name, String idarea) {
+    public Room(String name, int idarea) {
         Name = name;
         IdArea = idarea;
     }
@@ -32,7 +32,7 @@ public class Room {
         Name = name;
     }
 
-    public String getIdArea() {
+    public int getIdArea() {
         return IdArea;
     }
 

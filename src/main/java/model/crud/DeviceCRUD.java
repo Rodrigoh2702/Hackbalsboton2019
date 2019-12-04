@@ -15,6 +15,10 @@ public class DeviceCRUD {
         this.manager = manager;
     }
 
+    public DeviceCRUD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void createDevice(Device device){
 
         EntityTransaction transaction = manager.getTransaction();

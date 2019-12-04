@@ -35,6 +35,28 @@ public class UserCRUD {
             manager.close();
         }
     }
+    public void updateUser(User user, String newPass){
+        EntityManager manager = EMFBootstrapper.openEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            clone(user, newPass);
+            manager.merge(user);
+            transaction.commit();
+            System.out.printf("se ha actualizado con exito");
+        }
+        catch(PersistenceException e) {
+            transaction.rollback();
+            throw e;
+        }
+        finally {
+            manager.close();
+        }
+    }
+    
+    private void clone(User user,String newPass){
+        user.setPassword(newPass);
+    }
 
     public User getUser(String email){
         EntityManager manager = EMFBootstrapper.openEntityManager();
@@ -47,6 +69,33 @@ public class UserCRUD {
         }
 
         return user;
+    }
+    //Log.getQuestion(this)
+    public User getQuestionQuery(String email){
+        EntityManager manager = EMFBootstrapper.openEntityManager();
+        User user = new User();
+        try {
+            user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
+        }
+        catch(PersistenceException e) {
+            throw e;
+        }
+
+        return user;
+    }
+    
+    public User getAnswer(String answer){
+        EntityManager manager = EMFBootstrapper.openEntityManager();
+        User user = new User();
+        try {
+            user = (User) manager.createQuery("from users u where u.Answer='" + answer + "'").getSingleResult();
+        }
+        catch(PersistenceException e) {
+            throw e;
+        }
+
+        return user;
+        
     }
     
     public void deleteUser(String email){

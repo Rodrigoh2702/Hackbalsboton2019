@@ -15,6 +15,10 @@ public class User {
     private String Email;
     @Column(name = "password", columnDefinition = "LONGTEXT")
     private String Password;
+    @Column(name = "question")
+    private String Question;
+    @Column(name = "answer")
+    private String Answer;
 
     public User(){}
 
@@ -30,6 +34,14 @@ public class User {
 
     public String getName() {
         return Name;
+    }
+    
+    public String getQuestion(){
+        return Question;
+    }
+    
+    public void setQuestion(String question){
+        Question = question;
     }
 
     public void setName(String name) {
@@ -51,6 +63,14 @@ public class User {
     public void setPassword(String password) {
         Password = password;
     }
+    
+    public String getAnswer(){
+        return Answer;
+    }
+    
+    public void setAnswer(String answer){
+        Answer = answer;
+    }
 
     @Override
     public String toString() {
@@ -59,6 +79,7 @@ public class User {
                 ", Name='" + Name + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Password='" + Password + '\'' +
-                '}';
+                ", Question='" + Question + '\'' +
+                "}";
     }
 }
