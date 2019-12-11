@@ -188,7 +188,7 @@ add_user Reg = new add_user();
 
         try {
             Reg.nuevo_usuario(this);
-            Login Log=new Login();
+            Login Log = new Login();
             Log.setVisible(true);
             this.dispose();
         } catch (EmptyException ex) {

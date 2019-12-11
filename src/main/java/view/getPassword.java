@@ -6,6 +6,7 @@
 package view;
 
 import controller.Login_Controller;
+import controller.changePassword;
 
 
 /**
@@ -14,7 +15,7 @@ import controller.Login_Controller;
  */
 public class getPassword extends javax.swing.JFrame {
 
-    Login_Controller Log = new Login_Controller();
+    changePassword Log = new changePassword();
     
 
     /**

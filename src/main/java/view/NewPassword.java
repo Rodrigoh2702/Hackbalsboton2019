@@ -5,7 +5,7 @@
  */
 package view;
 
-import controller.Login_Controller;
+import controller.changePassword;
 import model.crud.UserCRUD;
 import model.schemas.User;
 
@@ -15,7 +15,7 @@ import model.schemas.User;
  */
 public class NewPassword extends javax.swing.JFrame {
 
-    Login_Controller Log = new Login_Controller();
+    changePassword Log = new changePassword();
 
     /**
      * Creates new form NewPassword

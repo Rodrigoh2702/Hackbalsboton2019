@@ -18,87 +18,63 @@ import model.schemas.User;
  */
 public class UserCRUD {
     
-    public void createUser(User user){
+    public void createUser(User user) throws PersistenceException{
         EntityManager manager = EMFBootstrapper.openEntityManager();
         EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            manager.persist(user);
-            transaction.commit();
-            System.out.printf("se ha añadido con exito");
-        }
-        catch(PersistenceException e) {
-            transaction.rollback();
-            throw e;
-        }
-        finally {
-            manager.close();
-        }
+        
+        transaction.begin();
+        manager.persist(user);
+        transaction.commit();
+        System.out.printf("se ha añadido con exito");
+       
     }
-    public void updateUser(User user, String newPass){
+    public void updateUser(User user, String newPass) throws PersistenceException{
         EntityManager manager = EMFBootstrapper.openEntityManager();
         EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            clone(user, newPass);
-            manager.merge(user);
-            transaction.commit();
-            System.out.printf("se ha actualizado con exito");
-        }
-        catch(PersistenceException e) {
-            transaction.rollback();
-            throw e;
-        }
-        finally {
-            manager.close();
-        }
+        
+        transaction.begin();
+        clone(user, newPass);
+        manager.merge(user);
+        transaction.commit();
+        System.out.printf("se ha actualizado con exito");
+       
     }
     
     private void clone(User user,String newPass){
         user.setPassword(newPass);
     }
 
-    public User getUser(String email){
+    public User getUser(String email) throws PersistenceException{
         EntityManager manager = EMFBootstrapper.openEntityManager();
         User user = new User();
-        try {
-            user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
-        }
-        catch(PersistenceException e) {
-            throw e;
-        }
+       
+        user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
 
         return user;
     }
     //Log.getQuestion(this)
-    public User getQuestionQuery(String email){
+    public User getQuestionQuery(String email) throws PersistenceException{
         EntityManager manager = EMFBootstrapper.openEntityManager();
         User user = new User();
-        try {
-            user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
-        }
-        catch(PersistenceException e) {
-            throw e;
-        }
+        
+        user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
+   
 
         return user;
     }
     
-     public User getAnswer(String answer){
+     public User getAnswer(String answer) throws PersistenceException{
         EntityManager manager = EMFBootstrapper.openEntityManager();
         User user = new User();
-        try {
-            user = (User) manager.createQuery("from User u where u.Answer='" + answer + "'").getSingleResult();
-        }
-        catch(PersistenceException e) {
-            throw e;
-        }
+        
+        user = (User) manager.createQuery("from User u where u.Answer='" + answer + "'").getSingleResult();
+        
 
         return user;
         
     }
     
-    public void deleteUser(String email){
+    public void deleteUser(String email) throws PersistenceException{
         String delims = "[,]";
         String[] tokens = email.split(delims);
 
@@ -107,19 +83,12 @@ public class UserCRUD {
             User user = getUser(tokens[i]);
             EntityManager manager = EMFBootstrapper.openEntityManager();
             EntityTransaction transaction = manager.getTransaction();
-            try {
-                transaction.begin();
-                manager.remove(user);
-                transaction.commit();
-                System.out.printf("se ha eliminado con exito");
-            }
-            catch(PersistenceException e) {
-                transaction.rollback();
-                throw e;
-            }
-            finally {
-                manager.close();
-            }
+          
+            transaction.begin();
+            manager.remove(user);
+            transaction.commit();
+            System.out.printf("se ha eliminado con exito");
+           
         }
     }
 
