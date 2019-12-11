@@ -6,6 +6,9 @@
 package view;
 
 import controller.Login_Controller;
+import controller.exceptions.EmptyException;
+import javax.persistence.PersistenceException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -142,7 +145,7 @@ public class Login extends javax.swing.JFrame {
             }
       
         } catch (Exception ex) {
-            Log.showError(ex, this);
+            showError(ex, this);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -220,6 +223,19 @@ public class Login extends javax.swing.JFrame {
     public void toggle () throws Exception
     {
         this.setVisible(!this.isVisible());
+    }
+    
+     public void showError(Exception ex, Login view){
+        if(ex instanceof EmptyException){
+            JOptionPane.showMessageDialog(
+                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else if(ex instanceof PersistenceException){
+            JOptionPane.showMessageDialog(
+                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(
+                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     

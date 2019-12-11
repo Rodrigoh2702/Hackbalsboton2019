@@ -6,6 +6,9 @@
 package view;
 
 import controller.changePassword;
+import controller.exceptions.EmptyException;
+import javax.persistence.PersistenceException;
+import javax.swing.JOptionPane;
 import model.crud.UserCRUD;
 import model.schemas.User;
 
@@ -85,9 +88,7 @@ public class NewPassword extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        System.out.println(getEmail());
-        try{
-            
+        try{  
             User userPass = new User();
             UserCRUD updateUser = new UserCRUD();
             userPass = Log.newPassword(this);
@@ -97,7 +98,7 @@ public class NewPassword extends javax.swing.JFrame {
             login.setVisible(true);
             this.dispose();
         }catch(Exception ex){
-            Log.showErrorNewPass(ex, this);
+            showErrorNewPass(ex, this);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -153,6 +154,19 @@ public class NewPassword extends javax.swing.JFrame {
     }
     public String getEmail(){
         return email;
+    }
+    
+    public void showErrorNewPass(Exception ex, NewPassword view){
+        if(ex instanceof EmptyException){
+            JOptionPane.showMessageDialog(
+                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else if(ex instanceof PersistenceException){
+            JOptionPane.showMessageDialog(
+                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(
+                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }

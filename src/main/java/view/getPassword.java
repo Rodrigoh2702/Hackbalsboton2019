@@ -5,8 +5,10 @@
  */
 package view;
 
-import controller.Login_Controller;
 import controller.changePassword;
+import controller.exceptions.EmptyException;
+import javax.persistence.PersistenceException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -105,7 +107,7 @@ public class getPassword extends javax.swing.JFrame {
                 this.dispose();
             }
         } catch (Exception ex) {
-            Log.showErrorPass(ex, this);
+            showErrorPass(ex, this);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -153,6 +155,19 @@ public class getPassword extends javax.swing.JFrame {
 
     public String getEmailText(){
         return jTextField1.getText();
+    }
+    
+    public void showErrorPass(Exception ex, getPassword view){
+        if(ex instanceof EmptyException){
+            JOptionPane.showMessageDialog(
+                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else if(ex instanceof PersistenceException){
+            JOptionPane.showMessageDialog(
+                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(
+                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     /*public String getAnswerText(){

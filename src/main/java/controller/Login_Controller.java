@@ -5,17 +5,13 @@ import model.crud.UserCRUD;
 import model.schemas.User;
 import view.Login;
 import javax.swing.*;
-import java.sql.SQLException;
 import java.util.*;
-import javax.persistence.PersistenceException;
-import view.NewPassword;
 import view.Question;
-import view.getPassword;
 
 public class Login_Controller {
     
     //Validates the input and send it to the model
-    public Boolean LoginUser(Login view) throws EmptyException {
+    public Boolean LoginUser(Login view) throws Exception {
         validations val = new validations();
         Boolean validate = false;
         User user;
@@ -31,19 +27,17 @@ public class Login_Controller {
         }
         else
         {
-            try{
-                user = model.getUser(data.get("email"));
-                validate = validateLogin(data, user, view);
-            }catch(PersistenceException ex){
-                showError(ex, view);
-            }
+            
+        user = model.getUser(data.get("email"));
+        validate = validateLogin(data, user, view);
+            
 
         }
         
         return validate;
     }
    
-    public Boolean answerUser(Question view) throws EmptyException{        
+    public Boolean answerUser(Question view) throws Exception{        
         Boolean validate = false;
         validations val = new validations();
         User user;
@@ -58,13 +52,9 @@ public class Login_Controller {
         }
         else
         {
-            try{
-                user = model.getAnswer(data.get("answer"));
-                System.out.println(user);
-                validate = val.validateAnswer(data, user, view);
-            }catch(Exception ex){
-                showErrorAnswer(ex, view);
-            }
+        user = model.getAnswer(data.get("answer"));
+        System.out.println(user);
+        validate = val.validateAnswer(data, user, view);
         }
         return validate;
     }
@@ -82,57 +72,13 @@ public class Login_Controller {
     }
 
     //Display an OptionPane in the view with the error
-    public void showError(Exception ex, Login view){
-        if(ex instanceof EmptyException){
-            JOptionPane.showMessageDialog(
-                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if(ex instanceof SQLException){
-            JOptionPane.showMessageDialog(
-                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(
-                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+   
     
-    public void showErrorPass(Exception ex, getPassword view){
-        if(ex instanceof EmptyException){
-            JOptionPane.showMessageDialog(
-                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if(ex instanceof SQLException){
-            JOptionPane.showMessageDialog(
-                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(
-                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
     
-    public void showErrorNewPass(Exception ex, NewPassword view){
-        if(ex instanceof EmptyException){
-            JOptionPane.showMessageDialog(
-                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if(ex instanceof SQLException){
-            JOptionPane.showMessageDialog(
-                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(
-                    view, "Unexpected error", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
     
-    public void showErrorAnswer(Exception ex, Question view){
-        if(ex instanceof EmptyException){
-            JOptionPane.showMessageDialog(
-                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if(ex instanceof SQLException){
-            JOptionPane.showMessageDialog(
-                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(
-                    view, "Unexpected error :(", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
+    
+    
 }
 
 

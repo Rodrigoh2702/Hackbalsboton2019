@@ -6,6 +6,9 @@
 package view;
 
 import controller.Login_Controller;
+import controller.exceptions.EmptyException;
+import javax.persistence.PersistenceException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -98,7 +101,7 @@ public class Question extends javax.swing.JFrame {
             }
       
         } catch (Exception ex) {
-            Log.showErrorAnswer(ex, this);
+            showErrorAnswer(ex, this);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -158,6 +161,19 @@ public class Question extends javax.swing.JFrame {
     
     public String getEmail(){
         return email;
+    }
+    
+    public void showErrorAnswer(Exception ex, Question view){
+        if(ex instanceof EmptyException){
+            JOptionPane.showMessageDialog(
+                    view, "You must fill every text field" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else if(ex instanceof PersistenceException){
+            JOptionPane.showMessageDialog(
+                    view, "Database error" , "ERROR", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(
+                    view, "Unexpected error :(", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
